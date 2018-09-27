@@ -3,12 +3,12 @@ import React, { Component } from "react";
 export default class Book extends Component {
   render() {
     let booksList = this.props.data;
-    
+
     return (
-      <li >
-        <div>
-          {booksList.map(book => (
-            <div className="book" key={book.id}>
+      <ol className="books-grid"> 
+        {booksList.map(book => (
+          <li key={book.id}>
+            <div className="book">
               <div className="book-top">
                 <div
                   className="book-cover"
@@ -33,9 +33,9 @@ export default class Book extends Component {
               <div className="book-title">{book.title}</div>
               <div className="book-authors">{book.author}</div>
             </div>
-          ))}
-        </div>
-      </li>
+          </li>
+        ))}
+      </ol>
     );
   }
 }
