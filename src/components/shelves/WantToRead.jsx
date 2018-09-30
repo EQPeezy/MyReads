@@ -12,7 +12,11 @@ class WantToRead extends Component {
               .filter(book => book.shelf === "wantToRead")
               .map(book => (
                 <li key={book.id}>
-                  <Book book={book} />
+                  <Book
+                    book={book}
+                    changeShelf={this.props.changeShelf}
+                    shelf={this.props.books.shelf}
+                  />
                 </li>
               ))}
           </ol>
