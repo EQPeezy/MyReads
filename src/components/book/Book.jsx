@@ -17,10 +17,14 @@ export default class Book extends Component {
           />
           <div className="book-shelf-changer">
             <select
-              onChange={event =>
+              onChange={(event) => {
                 this.props.changeShelf(this.props.book, event.target.value)
+
               }
-              value={this.props.shelf}
+                
+              }
+              value={this.props.book.shelf}
+              
             >
               <option value="move" disabled>
                 Move to...

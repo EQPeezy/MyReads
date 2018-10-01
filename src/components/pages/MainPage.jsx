@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import CurrentlyReading from "../shelves/CurrentlyReading";
 import WantToRead from "../shelves/WantToRead";
 import Read from "../shelves/Read";
+
 
 class MainPage extends Component {
   render() {
@@ -10,7 +12,7 @@ class MainPage extends Component {
       
       <div className="list-books">
         <div className="list-books-title">
-          <h1>MyReads</h1>
+          <h1>My Library</h1>
         </div>
         <div className="list-books-content">
           <CurrentlyReading 
@@ -30,9 +32,12 @@ class MainPage extends Component {
           />
         </div>
         <div className="open-search">
-          <a onClick={() => this.setState({ showSearchPage: true })}>
+          {/* <a onClick={() => this.props.history.push("/search")}>
             Add a book
-          </a>
+          </a> */}
+          <NavLink to="/search">
+            Add a book
+          </NavLink>
         </div>
       </div>
     );

@@ -1,18 +1,20 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import * as BooksAPI from "../../BooksAPI";
 import Book from "../book/Book";
 
 class SearchPage extends Component {
   state = {
     bookSearch: "",
-    searchedBooks: []
+    searchedBooks: [],
+    status: "none"
   };
 
   handleChange = query => {
     this.setState({
       bookSearch: query
     });
-    this.getSearchedBooks(query)
+    this.getSearchedBooks(query);
   };
   // handleChange(event) {
   //   this.setState({ bookSearch: event.target.value });
@@ -23,31 +25,26 @@ class SearchPage extends Component {
       BooksAPI.search(query).then(searchedBooks => {
         if (searchedBooks.error) {
           this.setState({ searchedBooks: [] });
-          console.log('Error Triggered')
+          console.log(
+            "Book Search Error Triggered. Please see SearchPage.jsx."
+          );
         } else {
-        this.setState({ searchedBooks: searchedBooks });
-          console.log('error not triggered')
+          this.setState({ searchedBooks: searchedBooks });
         }
       });
     } else {
-      this.setState({searchedBooks: []});
+      this.setState({ searchedBooks: [] });
     }
-    
   };
 
   render() {
-    console.log('render')
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <a
-            className="close-search"
-            // onClick={() => this.setState({ showSearchPage: false })}
-          >
+          <NavLink className="close-search" to="/">
             Close
-          </a>
+          </NavLink>
           <div className="search-books-input-wrapper">
-            
             <input
               type="text"
               placeholder="Search by title or author"
@@ -58,11 +55,9 @@ class SearchPage extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {
-              
-              this.state.searchedBooks.map(book => (
+            {this.state.searchedBooks.map(book => (
               <li key={book.id}>
-                <Book book={book} />
+                <Book book={book} changeShelf={this.props.changeShelf} />
               </li>
             ))}
           </ol>
